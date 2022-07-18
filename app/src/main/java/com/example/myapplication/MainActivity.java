@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -64,9 +65,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void call(View v){
         String mynum = num.getText().toString();
-        Intent i = new Intent(Intent.ACTION_DIAL);
-        i.setData(Uri.parse("tel"+mynum));
-        startActivity(i);
+        Log.i("call", "started");
+        try{
+            Intent i = new Intent(Intent.ACTION_DIAL);
+            i.setData(Uri.fromParts("tel",mynum,null));
+            startActivity(i);
+        }catch( Exception e){
+            Log.i("call",e.getMessage());
+        }
+
 
     }
 
